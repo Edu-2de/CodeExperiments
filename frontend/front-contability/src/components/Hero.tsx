@@ -8,7 +8,7 @@ export default function Hero() {
       style={{
         width: "100vw",
         minHeight: "500px",
-        background: "#10182f",
+        background: "#0d1721",
         color: "#fff",
         display: "flex",
         alignItems: "stretch",
@@ -23,11 +23,11 @@ export default function Hero() {
         className="d-flex flex-column justify-content-center"
         style={{
           flex: "1 1 0",
-          maxWidth: 600,
+          maxWidth: "50%",
           width: "100%",
           padding: "64px 32px 56px 7vw",
           zIndex: 2,
-          background: "rgba(16,24,47,0.97)",
+          background: "#0d1721",
         }}
       >
         <div>
