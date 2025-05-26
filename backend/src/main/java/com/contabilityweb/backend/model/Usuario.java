@@ -7,8 +7,7 @@ import java.util.UUID;
 @Table(name = "usuarios")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(unique = true, nullable = false)
