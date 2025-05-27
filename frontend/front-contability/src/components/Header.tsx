@@ -1,8 +1,14 @@
 'use client'
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
-export default function Header() {
+interface HeaderProps {
+  forceDark?: boolean;
+  styleOverride?: React.CSSProperties;
+}
+
+export default function Header({ forceDark = false, styleOverride = {} }: HeaderProps) {
   const [show, setShow] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,6 +16,7 @@ export default function Header() {
   const [usuarioLogado, setUsuarioLogado] = useState<{ username: string } | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   // Checa se está logado ao carregar o header
   useEffect(() => {
@@ -84,13 +91,15 @@ export default function Header() {
     <header
       className={`navbar navbar-expand-lg position-fixed top-0 start-0 w-100 py-4 d-flex align-items-center px-3 px-sm-4 px-md-5 transition-header ${show ? "show" : "hide"}`}
       style={{
-        background: isAtTop ? "transparent" : "#0d1721",
+        background: forceDark ? "#0d1721" : (isAtTop ? "transparent" : "#0d1721"),
         zIndex: 1050,
         borderBottom: "1px solid rgba(255,255,255,0.10)",
         boxShadow: "0 2px 8px 0 rgba(0,0,0,0.04)",
-        transition: "background 0.3s, transform 0.3s"
+        transition: "background 0.3s, transform 0.3s",
+        ...styleOverride,
       }}
     >
+      {/* ...restante do código permanece igual... */}
       {/* Botão Hamburger + Logo juntos */}
       <div className="d-flex align-items-center flex-shrink-0">
         <button
@@ -111,16 +120,40 @@ export default function Header() {
       <nav className="flex-grow-1 d-none d-lg-block">
         <ul className="navbar-nav flex-row gap-4" style={{ marginLeft: "4%" }}>
           <li className="nav-item">
-            <Link href="/" className="nav-link" style={{ color: "#e9f2f9" }}>Home</Link>
+            <Link
+              href="/"
+              className="nav-link"
+              style={{ color: pathname === "/" ? "#e9f2f9" : "#6c757d" }}
+            >
+              Home
+            </Link>
           </li>
           <li className="nav-item">
-            <Link href="/servicos" className="nav-link" style={{ color: "#6c757d" }}>Serviços</Link>
+            <Link
+              href="/servicos"
+              className="nav-link"
+              style={{ color: pathname === "/servicos" ? "#e9f2f9" : "#6c757d" }}
+            >
+              Serviços
+            </Link>
           </li>
           <li className="nav-item">
-            <Link href="/planos" className="nav-link" style={{ color: "#6c757d" }}>Planos</Link>
+            <Link
+              href="/dashboard"
+              className="nav-link"
+              style={{ color: pathname === "/dashboard" ? "#e9f2f9" : "#6c757d" }}
+            >
+              Dashboard
+            </Link>
           </li>
           <li className="nav-item">
-            <Link href="/sobre" className="nav-link" style={{ color: "#6c757d" }}>Sobre</Link>
+            <Link
+              href="/sobre"
+              className="nav-link"
+              style={{ color: pathname === "/sobre" ? "#e9f2f9" : "#6c757d" }}
+            >
+              Sobre
+            </Link>
           </li>
         </ul>
       </nav>
@@ -190,7 +223,7 @@ export default function Header() {
               <Link href="/servicos" className="nav-link fs-4" style={{ color: "#6c757d" }} onClick={() => setMenuOpen(false)}>Serviços</Link>
             </li>
             <li className="nav-item">
-              <Link href="/planos" className="nav-link fs-4" style={{ color: "#6c757d" }} onClick={() => setMenuOpen(false)}>Planos</Link>
+              <Link href="/dashboard" className="nav-link fs-4" style={{ color: "#6c757d" }} onClick={() => setMenuOpen(false)}>Dashboard</Link>
             </li>
             <li className="nav-item">
               <Link href="/sobre" className="nav-link fs-4" style={{ color: "#6c757d" }} onClick={() => setMenuOpen(false)}>Sobre</Link>
