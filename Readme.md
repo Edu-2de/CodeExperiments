@@ -61,7 +61,3 @@ O ContabApp foi desenvolvido para facilitar o controle financeiro, permitindo qu
 
 ### Backend
 
-1. Configure o banco de dados PostgreSQL e ajuste as credenciais em `backend/src/main/resources/application.properties`.
-2. No diretório `backend`, execute:
-   ```sh
-   ./mvnw spring-boot:run
