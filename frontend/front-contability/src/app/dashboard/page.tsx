@@ -2,12 +2,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import SidebarMenu from "../../components/SidebarMenu";
+import Link from "next/link";
+import { FaBars, FaHome, FaChartBar, FaChartLine, FaFileInvoiceDollar, FaCog } from "react-icons/fa";
 
 export default function Dashboard() {
   const router = useRouter();
   const [usuarioLogado, setUsuarioLogado] = useState<{ username: string; avatar?: string } | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const user = localStorage.getItem("usuarioLogado");
@@ -23,14 +27,13 @@ export default function Dashboard() {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setDropdownOpen(false);
       }
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setMobileMenuOpen(false);
+      }
     }
-    if (dropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
+    document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [dropdownOpen]);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("usuarioLogado");
@@ -40,7 +43,87 @@ export default function Dashboard() {
 
   return (
     <div className="new-dashboard-root">
+      {/* SidebarMenu para desktop */}
       <SidebarMenu />
+
+      {/* Botão hamburger para mobile */}
+      <button
+        className="btn btn-primary d-md-none mobile-menu-btn"
+        style={{
+          position: "fixed",
+          top: 18,
+          left: 18,
+          zIndex: 2001,
+          borderRadius: "50%",
+          width: 44,
+          height: 44,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        onClick={() => setMobileMenuOpen((open) => !open)}
+        aria-label="Abrir menu"
+      >
+        <FaBars size={22} />
+      </button>
+
+      {/* Dropdown do menu mobile */}
+      {mobileMenuOpen && (
+        <div
+          className="mobile-menu-dropdown"
+          ref={mobileMenuRef}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "80vw",
+            maxWidth: 320,
+            height: "100vh",
+            background: "#0d1721",
+            zIndex: 2002,
+            boxShadow: "2px 0 12px rgba(0,0,0,0.18)",
+            padding: "32px 0 0 0",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div className="px-4 mb-4">
+            <span className="fw-bold" style={{ color: "#e9f2f9", fontSize: 22 }}>
+              <span style={{ color: "#0d6efd" }}>Contab</span>App
+            </span>
+          </div>
+          <nav>
+            <ul className="list-unstyled px-4">
+              <li className="mb-3">
+                <Link href="/" className="d-flex align-items-center gap-3 text-white text-decoration-none" onClick={() => setMobileMenuOpen(false)}>
+                  <FaHome /> Home
+                </Link>
+              </li>
+              <li className="mb-3">
+                <Link href="/dashboard" className="d-flex align-items-center gap-3 text-white text-decoration-none" onClick={() => setMobileMenuOpen(false)}>
+                  <FaChartBar /> Visão Geral
+                </Link>
+              </li>
+              <li className="mb-3">
+                <Link href="#" className="d-flex align-items-center gap-3 text-white text-decoration-none" onClick={() => setMobileMenuOpen(false)}>
+                  <FaChartLine /> Relatórios
+                </Link>
+              </li>
+              <li className="mb-3">
+                <Link href="#" className="d-flex align-items-center gap-3 text-white text-decoration-none" onClick={() => setMobileMenuOpen(false)}>
+                  <FaFileInvoiceDollar /> Nova Despesa
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="d-flex align-items-center gap-3 text-white text-decoration-none" onClick={() => setMobileMenuOpen(false)}>
+                  <FaCog /> Configurações
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      )}
+
       <div className="new-main-content">
         {/* Topbar */}
         <div className="new-dashboard-header">
@@ -533,6 +616,23 @@ export default function Dashboard() {
         @media (max-width: 991.98px) {
           .sidebar-dashboard { display: none !important; }
           .new-main-content { margin-left: 0; padding: 12px 5vw; }
+        }
+      `}</style>
+      <style jsx global>{`
+        .mobile-menu-dropdown a {
+          color: #fff !important;
+          text-decoration: none !important;
+          font-weight: 500;
+          font-size: 1.08rem;
+        }
+        .mobile-menu-dropdown a:hover {
+          color: #0d6efd !important;
+        }
+        .mobile-menu-dropdown svg {
+          color: #fff !important;
+        }
+        .mobile-menu-dropdown a:hover svg {
+          color: #0d6efd !important;
         }
       `}</style>
     </div>
