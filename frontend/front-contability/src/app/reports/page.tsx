@@ -6,6 +6,7 @@ import { FaArrowLeft } from "react-icons/fa";
 //comentario 2
 //comentario 3
 //comentario 4
+//comentario 5
 export default function ReportsPage() {
   return (
     <div className="new-dashboard-root">
