@@ -51,13 +51,3 @@ O ContabApp foi desenvolvido para facilitar o controle financeiro, permitindo qu
 
 ---
 
-## Como Executar
-
-### Pré-requisitos
-
-- Node.js 18+
-- Java 17+
-- PostgreSQL
-
-### Backend
-
