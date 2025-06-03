@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { registrar } from "@/api/usuarioApi"
 import Link from "next/link"
-
+//comnenatiro
 export default function RegistroPage() {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
