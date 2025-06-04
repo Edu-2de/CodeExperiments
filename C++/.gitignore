@@ -1,0 +1,33 @@
+# Compilados
+*.exe
+*.out
+*.o
+*.obj
+*.gch
+*.pch
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+
+# Diretórios de build
+/build/
+/bin/
+/Debug/
+/Release/
+
+# Arquivos de IDEs
+*.vcxproj*
+*.sln
+*.user
+*.opensdf
+*.sdf
+*.VC.db
+*.vscode/
+.idea/
+*.code-workspace
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db

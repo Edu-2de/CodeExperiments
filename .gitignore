@@ -1,0 +1,67 @@
+# --- Python ---
+.venv/
+venv/
+ENV/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# --- Node.js / JavaScript ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tmp
+
+# --- Java ---
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+.mtj.tmp/
+.project
+.classpath
+.settings/
+bin/
+*.iml
+.idea/
+out/
+
+# --- C# / .NET ---
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# --- C++ ---
+*.exe
+*.out
+*.o
+*.obj
+*.gch
+*.pch
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+/Debug/
+/Release/
+
+# --- IDEs ---
+.vscode/
+.idea/
+*.code-workspace
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
