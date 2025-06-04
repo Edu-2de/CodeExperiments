@@ -19,6 +19,6 @@ This repository serves as a personal playground for experimenting with different
 - Most files are not intended for production use.
 - Feel free to explore or use any snippet you find helpful.
 
----
+--------------
 
 Happy coding!
